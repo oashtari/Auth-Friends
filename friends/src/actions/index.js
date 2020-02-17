@@ -32,9 +32,9 @@ export const addFriend = friend => dispatch => {
 
     setTimeout(() => {
         axiosWithAuth()
-            .post(`/friends`, friend)
+            .post(`/friends`, { id: Date.now(), ...friend })
             .then(res => {
-                console.log(res);
+                console.log('testing new friend added', res.data);
                 dispatch({ type: FRIEND_ADDED, payload: res.data })
             })
             .catch(err => {
