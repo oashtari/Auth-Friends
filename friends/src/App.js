@@ -12,9 +12,9 @@ import logger from 'redux-logger';
 
 import { friendReducer as reducer } from './reducers';
 
+import Login from './components/LogInForm';
 import Friends from './components/Friends';
-import LogInForm from './components/LogInForm';
-
+import AddFriendForm from './components/AddFriendForm';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
@@ -28,11 +28,14 @@ function App() {
         <Router>
           <Link to='/login'>Log In</Link>
           <br />
-          <Link to='/protected'>Protected Friends page</Link>
+          <Link to='/friends'>Protected Friends page</Link>
+          <br />
+          <Link to='/add'>Want to add a friend?</Link>
           <Switch>
-            <Route component={LogInForm} />
-            <Route path='/login' component={LogInForm} />
             <ProtectedRoute path='/friends' component={Friends} />
+            <ProtectedRoute path='/add' component={AddFriendForm} />
+            <Route component={Login} />
+            <Route path='/login' component={Login} />
           </Switch>
         </Router>
       </Provider>
